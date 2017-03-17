@@ -17,7 +17,7 @@ The proposed solution will allow passenger remotely control seats incline and ma
 
 ## Proposed solution
 
-The list of proposed remote-control modules that can be implemented is signed below.
+The list of proposed remote-control options for vehicle modules that can be implemented is signed below.
 
 #### For "SEATS" remote-control mobile application will be able to:
 
@@ -49,7 +49,7 @@ The list of proposed remote-control modules that can be implemented is signed be
 | ------------ | ------------ |------------ |
 | Display Mode | DAY, NIGHT, AUTO | Display mode of the HMI display |
 | Distance Unit | Miles, Kilometers | Dispance Unit type to be applied for maps/tracking distances |
-| Temperature Unit | Temperature Unit | Temperature Unit to be applied for temperature measuring systems |
+| Temperature Unit | FAHRENHEIT, CELSIUS | Temperature Unit to be applied for temperature measuring systems |
 
 #### For "AUDIO" remote-control mobile application will be able to READ and SET:
 
