@@ -1,7 +1,7 @@
 # Seats HMI Settings and Audio controls updates
 
 * Proposal: [SDL-NNNN](NNNN-filename.md)
-* Author: [SDL Developer](https://github.com/smartdevicelink)
+* Author: [Olesia Vasylieva](https://github.com/smartdevicelink)
 * Status: **Awaiting review**
 * Impacted Platforms: [Core / iOS / Android / Web / RPC]
 
@@ -162,7 +162,7 @@ The following updates need to be implemented in HMI and Mobile APIs:
 ```
 ## Potential Downsides
 
-There are no downside the author can see
+N/A
 
 
 ## Impact on existing code
