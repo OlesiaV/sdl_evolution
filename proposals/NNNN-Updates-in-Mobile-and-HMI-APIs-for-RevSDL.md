@@ -3,34 +3,37 @@
 * Proposal: [SDL-NNNN](NNNN-filename.md)
 * Author: [SDL Developer](https://github.com/smartdevicelink)
 * Status: **Awaiting review**
-* Impacted Platforms: [Core / iOS / Android / Web / RPC / Protocol]
+* Impacted Platforms: [Core / iOS / Android / Web / RPC]
 
 ## Introduction
 
-To extend Revers_SDL functinality "SEATS", "HMI_SETTINGS" and "AUDIO" are proposed to be added to "ModuleType" in HMI and Mobile APIs
+Using pasenger's remote-control mobile application user is able to control specified modules of the vehicle via remote-control functionality turned on through HMI in vehicle settings. Currently only "CLIMATE" and "RADIO" modules are available for remote-control.
+Proposed to add "SEATS", "HMI_SETTINGS" and "AUDIO" to "ModuleType" in HMI and Mobile APIs to extend RSDL functionality.
 
 ## Motivation
 
-Proposed changes will allow user to obtain SEAT, HMI_SETTINGS and AUDIO control functions of the vehicle using mobile application.
-Previously only CLIMATE and RADIO control functions were enabled for mobile remote control.
+To extend RSDL functionality and obtain SEAT, HMI_SETTINGS and AUDIO remote-control modules of the vehicle using passenger's remote-control mobile application.
+The proposed solution will allow passenger remotely control seats incline and massage options, choose units for displaying temperature and distance, display modes, choose audio source, control volume.
 
 ## Proposed solution
 
-#### For SEATS control the following functions will be enabled for mobile application:
+The list of proposed remote-control modules that can be implemented is signed below.
+
+#### For "SEATS" remote-control mobile application will be able to:
 
 - READ and SET parameters
 
 | Control Item | Value range | Description |
 | ------------ | ------------ |------------ |
 | Cooled Seat level | 0-100 | Level of the seat cooling |
-| Seat Horizontal Positon | 0-100 | Adjust Seat Forward |
-| Seat Vertical Position | 0-100 | Height (up or down) |
-| Seat Angle Position | 0-100 | Seat pitch |
+| Seat Horizontal Positon | 0-100 | Adjust seat forward |
+| Seat Vertical Position | 0-100 | Adjust seat height (up or down) |
+| Seat Angle Position | 0-100 | Adjust seat angle position |
 | Back Tilt Position | 0-100 | Backrest recline |
 | Back Lumbar position | Struct {TOP, MIDDLE, BOTTOM} | Lumbar position |
 | Massage Seat | Start, Stop | Starting or stopping massage |
-| Massage Seat Zone | Struct{LUMBAR, BOTTOM} | Choosing massage zone |
-| Massage Seat Level | Struct{ HIGH, LOW} | Massage intensity |
+| Massage Seat Zone | Struct{LUMBAR, BOTTOM} | Defines the seat massage zone |
+| Massage Seat Level | Struct{ HIGH, LOW} | Defines seat massage intensity |
 
 - READ only parameters
 
@@ -40,23 +43,25 @@ Previously only CLIMATE and RADIO control functions were enabled for mobile remo
 | Heated Seat | ON, OFF | Display if seats heating is enabled |
 | Massage Enabled | ON, OFF | Display if seats massage is enabled |
 
-#### For "HMI Settings" mobile application will be able to READ and SET 
+#### For "HMI Settings" remote-control mobile application will be able to READ and SET:
 
 | Control Item | Value range | Description |
 | ------------ | ------------ |------------ |
-| Display Mode | DAY, NIGHT, AUTO | To display or set one of the available display modes |
-| Distance Unit | Miles, Kilometers | To display or set one of the available distance units |
-| Temperature Unit | Temperature Unit | To display or set one of the available temperature units |
+| Display Mode | DAY, NIGHT, AUTO | Display mode of the HMI display |
+| Distance Unit | Miles, Kilometers | Dispance Unit type to be applied for maps/tracking distances |
+| Temperature Unit | Temperature Unit | Temperature Unit to be applied for temperature measuring systems |
 
-#### For "AUDIO" mobile application will be able to READ and SET:
+#### For "AUDIO" remote-control mobile application will be able to READ and SET:
 
 | Control Item | Value range | Description |
 | ------------ | ------------ |------------ |
-| Audio Source | CD, TUNER, BLUETOOTH| Show the current one or set one of the available audio sources |
-| Audio volume | 0-100| Volume level |
-| Equilizer Settings | CStruct {Channel Name as string, Channel setting as 0-100} | Defines the list of supported channels (band) and their current/desired settings on HU |
+| Audio Source | CD, TUNER, BLUETOOTH| defines one of the available audio sources |
+| Audio volume | 0-100| The audio source volume level |
+| Equilizer Settings | Struct {Channel Name as string, Channel setting as 0-100} | Defines the list of supported channels (band) and their current/desired settings on HU |
 
-#### The following updates need to be implemented in HMI and Mobile APIs:
+## Detailed design
+
+The following updates need to be implemented in HMI and Mobile APIs:
 
 1. "ModuleType" enum must be extenede with "AUDIO", "SEATS", "HMI_SETTINGS" values
  ```
@@ -155,15 +160,18 @@ Previously only CLIMATE and RADIO control functions were enabled for mobile remo
         <param name="channelSettings" type="Integer" minvalue="0" maxvalue="100" mandatory="true"></param>
     </struct>
 ```
+## Potential Downsides
 
+There are no downside the author can see
 
-## Potential downsides
-
-Describe any potential downsides or known objections to the course of action presented in this proposal, then provide counter-arguments to these objections. You should anticipate possible objections that may come up in review and provide an initial response here. Explain why the positives of the proposal outweigh the downsides, or why the downside under discussion is not a large enough issue to prevent the proposal from being accepted.
 
 ## Impact on existing code
 
-Describe the impact that this change will have on existing code. Will some SDL integrations stop compiling due to this change? Will applications still compile but produce different behavior than they used to? Is it possible to migrate existing SDL code to use a new feature or API automatically?
+The proposal has the impact on:
+- RPCs: SetInteriorVehicleData, GetInteriorVehicleData, OnInteriorVehicleData, GetInteriorVehicleDataCapabilities
+- iOS and Android remote-control applications need to support new parameters
+- RSDL Policies need to support new ModuleTypes (SEATS, HMI_SETTINGS, AUDIO)
+- RSDL need to transfer RPCs with new parameters to appropriate vehicle's module. The response resultCode depends on vehicle's result of processing.
 
 ## Alternatives considered
 
