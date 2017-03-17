@@ -3,11 +3,11 @@
 * Proposal: [SDL-NNNN](NNNN-filename.md)
 * Author: [Olesia Vasylieva](https://github.com/smartdevicelink)
 * Status: **Awaiting review**
-* Impacted Platforms: [Core / iOS / Android / Web / RPC]
+* Impacted Platforms: [Core / iOS / Android / RPC]
 
 ## Introduction
 
-"ClimateControlData" structure defines the available control options of the "CLIMATE" vehicle module for remote-control mobile application.
+"ClimateControlData" structure defines the available remote-control options of the "CLIMATE" vehicle module for remote-control mobile application.
 
 ## Motivation
 
@@ -17,18 +17,27 @@ New parameters will also allow user to set ventialtion mode of the vehicle and r
 
 ## Proposed solution
 
-Proposed to modify the existing parameters of  the "ClimateControlData" structure
+Proposed to modify the existing parameters of  the "ClimateControlData" structure:
 
-1. To move "TemperatureUnit" from "ClimateControlData" structure to "Temperature" structure.
-"currentTemp" and "desiredTemp" must be specified by "Temperature" structure.
+1. Move "TemperatureUnit" from "ClimateControlData" structure to "Temperature" structure and define minimum and maximum values for TemperatureUnit
+"currentTemp" and "desiredTemp" in "ClimateControlData" structure must be specified by "Temperature" structure.
 
-2. To add new parameters "acMaxEnable" and "ventilationMode" to "ClimateControlData" structure
+| TemperatureUnit | MinimumValue | MaximumValue |
+| ------------ | ------------ |------------ |
+| CELSIUS | 14 | 30 |
+| FAHRENHEIT | 60 | 90 |
+
+2. Add new parameters "acMaxEnable" and "ventilationMode" to "ClimateControlData" structure
 
  | Parameter name |Value | Description |
  | ------------ | ------------ |------------ |
- 
+ | acMaxEnable | Boolean | If "true" - air conditioning is ON on the max level |
+ | VentilationMode | UPPER, LOWER, BOTH | Defines the mode for air ventialtion |
 
-##### HMI and Mobile APIs changes
+
+##### Detailed design
+
+HMI and Mobile APIs changes:
 
 ```
 <struct name="ClimateControlData">
@@ -81,7 +90,9 @@ N/A
 
 ## Impact on existing code
 
-Describe the impact that this change will have on existing code. Will some SDL integrations stop compiling due to this change? Will applications still compile but produce different behavior than they used to? Is it possible to migrate existing SDL code to use a new feature or API automatically?
+- Impacted RPCs:
+- Mobile remote-control applications need to support new parameters 
+- RSDL need to support the updated "ClimateControlData" structure with new parameters and new "Temperature" structure
 
 ## Alternatives considered
 
