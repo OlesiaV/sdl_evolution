@@ -167,7 +167,7 @@ N/A
 ## Impact on existing code
 
 The proposal has the impact on:
-- RPCs: SetInteriorVehicleData, GetInteriorVehicleData, OnInteriorVehicleData, GetInteriorVehicleDataCapabilities
+- RPCs: ButtonPress, SetInteriorVehicleData, GetInteriorVehicleData, OnInteriorVehicleData, GetInteriorVehicleDataCapabilities
 - iOS and Android remote-control applications need to support new parameters
 - RSDL Policies need to support new ModuleTypes (SEATS, HMI_SETTINGS, AUDIO)
 - RSDL need to transfer RPCs with new parameters to appropriate vehicle's module. The response resultCode depends on vehicle's result of processing.
