@@ -27,7 +27,7 @@ Proposed to modify the existing parameters of  the "ClimateControlData" structur
 | CELSIUS | 14 | 30 |
 | FAHRENHEIT | 60 | 90 |
 
-Note: Conversion of "desiredTemp" value to the appropriate temperature unit is applied on HU
+Note: Conversion of "desiredTemp" value to the appropriate temperature unit is performed on HMI side
 
 2. Add new parameters "acMaxEnable" and "ventilationMode" to "ClimateControlData" structure
 
