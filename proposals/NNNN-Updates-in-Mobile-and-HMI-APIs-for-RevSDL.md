@@ -8,7 +8,6 @@
 ## Introduction
 
 Using passenger's remote-control mobile application user is able to control specified modules of the vehicle via remote-control functionality turned on through HMI in vehicle settings. Currently only "CLIMATE" and "RADIO" modules are available for remote-control.
-Proposed to add "SEATS", "HMI_SETTINGS" and "AUDIO" to "ModuleType" in HMI and Mobile APIs to extend RSDL functionality.
 
 ## Motivation
 
