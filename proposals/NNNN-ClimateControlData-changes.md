@@ -11,7 +11,7 @@
 
 ## Motivation
 
-Proposed to optimize temperature settings in Climate Control with defined minimal and maximal temperature settings for different temperature units (Celsius or Farenheit).
+Proposed to optimize temperature settings in Climate Control with defined minimum and maximum temperature settings for different temperature units (Celsius or Farenheit).
 New parameters will also allow user to set ventialtion mode of the vehicle and receive information if the AC is on the maximum level.
 
 
@@ -26,6 +26,8 @@ Proposed to modify the existing parameters of  the "ClimateControlData" structur
 | ------------ | ------------ |------------ |
 | CELSIUS | 14 | 30 |
 | FAHRENHEIT | 60 | 90 |
+
+Note: Conversion of "desiredTemp" value to the appropriate temperature unit is applied on HU
 
 2. Add new parameters "acMaxEnable" and "ventilationMode" to "ClimateControlData" structure
 
@@ -90,7 +92,7 @@ N/A
 
 ## Impact on existing code
 
-- Impacted RPCs:
+- Impacted RPCs: ButtonPress, GetInteriorVehicleData, GetInteriorVehicleDataCapabilities, OnInteriorVehicleData, SetInteriorVehicleData
 - Mobile remote-control applications need to support new parameters 
 - RSDL need to support the updated "ClimateControlData" structure with new parameters and new "Temperature" structure
 
