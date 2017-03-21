@@ -7,18 +7,18 @@
 
 ## Introduction
 
-Using passenger's remote-control mobile application user is able to control specified modules of the vehicle via remote-control functionality turned on through HMI in vehicle settings. Currently only "CLIMATE" and "RADIO" modules are available for remote-control.
+Using passenger's remote-control mobile application user is able to control specified modules of the vehicle via remote-control functionality turned on through HMI in vehicle settings. Currently only 'CLIMATE' and 'RADIO' modules are available for remote-control.
 
 ## Motivation
 
-To extend RSDL functionality and obtain "SEAT", "HMI_SETTINGS" and "AUDIO" remote-control modules of the vehicle using passenger's remote-control mobile application.
+To extend RSDL functionality and obtain 'SEAT', 'HMI_SETTINGS' and 'AUDIO' remote-control modules of the vehicle using passenger's remote-control mobile application.
 The proposed solution will allow passenger remotely control seats incline and massage options, choose units for displaying temperature and distance, display modes, choose audio source, control volume.
 
 ## Proposed solution
 
 The list of proposed remote-control options for vehicle modules that can be implemented is signed below.
 
-#### For "SEATS" remote-control mobile application will be able to:
+#### For 'SEATS' remote-control mobile application will be able to:
 
 - READ and SET parameters
 
@@ -42,15 +42,15 @@ The list of proposed remote-control options for vehicle modules that can be impl
 | Heated Seat | ON, OFF | Display if seats heating is enabled |
 | Massage Enabled | ON, OFF | Display if seats massage is enabled |
 
-#### For "HMI Settings" remote-control mobile application will be able to READ and SET:
+#### For 'HMI Settings' remote-control mobile application will be able to READ and SET:
 
 | Control Item | Value range | Description |
 | ------------ | ------------ |------------ |
 | Display Mode | DAY, NIGHT, AUTO | Display mode of the HMI display |
-| Distance Unit | Miles, Kilometers | Dispance Unit type to be applied for maps/tracking distances |
+| Distance Unit | MILES, KILOMETERS | Dispance Unit type to be applied for maps/tracking distances |
 | Temperature Unit | FAHRENHEIT, CELSIUS | Temperature Unit to be applied for temperature measuring systems |
 
-#### For "AUDIO" remote-control mobile application will be able to READ and SET:
+#### For 'AUDIO' remote-control mobile application will be able to READ and SET:
 
 | Control Item | Value range | Description |
 | ------------ | ------------ |------------ |
@@ -62,7 +62,7 @@ The list of proposed remote-control options for vehicle modules that can be impl
 
 The following updates need to be implemented in HMI and Mobile APIs:
 
-1. "ModuleType" enum must be extenede with "AUDIO", "SEATS", "HMI_SETTINGS" values
+1. "ModuleType" enum must be extenede with 'AUDIO', 'SEATS', 'HMI_SETTINGS' values
  ```xml
  <enum name="ModuleType">
         <element name="CLIMATE"/>
@@ -73,7 +73,7 @@ The following updates need to be implemented in HMI and Mobile APIs:
     </enum>
 ```
 
-2. "ModuleData" structure must be extenede with "seatsControlData", "hmiControlData", "audioControlData" parameters:
+2. 'ModuleData' structure must be extenede with 'seatsControlData', 'hmiControlData', 'audioControlData' parameters:
 
 ```xml
 <struct name="ModuleData">
@@ -169,7 +169,7 @@ N/A
 The proposal has the impact on:
 - RPCs: ButtonPress, SetInteriorVehicleData, GetInteriorVehicleData, OnInteriorVehicleData, GetInteriorVehicleDataCapabilities
 - iOS and Android remote-control applications need to support new parameters
-- RSDL Policies need to support new ModuleTypes ("SEATS", "HMI_SETTINGS", "AUDIO")
+- RSDL Policies need to support new ModuleTypes ('SEATS', 'HMI_SETTINGS', 'AUDIO')
 - RSDL need to transfer RPCs with new parameters to appropriate vehicle's module. The response resultCode depends on vehicle's result of processing.
 
 ## Alternatives considered
