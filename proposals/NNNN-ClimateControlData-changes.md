@@ -41,7 +41,7 @@ Note: Conversion of "desiredTemp" value to the appropriate temperature unit is p
 
 HMI and Mobile APIs changes:
 
-```
+```xml
 <struct name="ClimateControlData">
     <param name="fanSpeed" type="Integer" minvalue="0" maxvalue="100" mandatory="false">
     </param>
