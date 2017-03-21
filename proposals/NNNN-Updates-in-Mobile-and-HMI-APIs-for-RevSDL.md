@@ -1,4 +1,4 @@
-# Seats HMI Settings and Audio controls updates
+# Seats, HMI Settings and Audio controls updates
 
 * Proposal: [SDL-NNNN](NNNN-filename.md)
 * Author: [Olesia Vasylieva](https://github.com/smartdevicelink)
@@ -11,7 +11,7 @@ Using passenger's remote-control mobile application user is able to control spec
 
 ## Motivation
 
-To extend RSDL functionality and obtain SEAT, HMI_SETTINGS and AUDIO remote-control modules of the vehicle using passenger's remote-control mobile application.
+To extend RSDL functionality and obtain "SEAT", "HMI_SETTINGS" and "AUDIO" remote-control modules of the vehicle using passenger's remote-control mobile application.
 The proposed solution will allow passenger remotely control seats incline and massage options, choose units for displaying temperature and distance, display modes, choose audio source, control volume.
 
 ## Proposed solution
@@ -63,7 +63,7 @@ The list of proposed remote-control options for vehicle modules that can be impl
 The following updates need to be implemented in HMI and Mobile APIs:
 
 1. "ModuleType" enum must be extenede with "AUDIO", "SEATS", "HMI_SETTINGS" values
- ```
+ ```xml
  <enum name="ModuleType">
         <element name="CLIMATE"/>
         <element name="RADIO"/>
@@ -75,7 +75,7 @@ The following updates need to be implemented in HMI and Mobile APIs:
 
 2. "ModuleData" structure must be extenede with "seatsControlData", "hmiControlData", "audioControlData" parameters:
 
-```
+```xml
 <struct name="ModuleData">
         <description>The moduleType indicates which type of data should be changed and identifies which data object exists in this struct. For example, if the moduleType is CLIMATE then a "climateControlData" should exist</description>
         <param name="moduleType" type="ModuleType"></param>
@@ -90,7 +90,7 @@ The following updates need to be implemented in HMI and Mobile APIs:
 
 3. The following structures and enums must be added:
 
-```
+```xml
 <struct name="SeatsControlData">
 	  <description>Corresponds to "SEATS" ModuleType</description>
         <param name="cooledSeats" type="Boolean" mandatory="false"></param>
@@ -169,7 +169,7 @@ N/A
 The proposal has the impact on:
 - RPCs: ButtonPress, SetInteriorVehicleData, GetInteriorVehicleData, OnInteriorVehicleData, GetInteriorVehicleDataCapabilities
 - iOS and Android remote-control applications need to support new parameters
-- RSDL Policies need to support new ModuleTypes (SEATS, HMI_SETTINGS, AUDIO)
+- RSDL Policies need to support new ModuleTypes ("SEATS", "HMI_SETTINGS", "AUDIO")
 - RSDL need to transfer RPCs with new parameters to appropriate vehicle's module. The response resultCode depends on vehicle's result of processing.
 
 ## Alternatives considered
