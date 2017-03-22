@@ -7,26 +7,32 @@
 
 ## Introduction
 
-This proposal defines SDL behavior in case of low voltage event.
-Low voltage scenario is triggered when the battery voltage hits below 7v. In case of such event emmc is turned off and all read/write operations are unavailable. After the voltage level is restored all oprations are resumed.
+This proposal defines SDL behavior in case of LOW_VOLTAGE event.
+LOW_VOLTAGE scenario is triggered when the battery voltage hits below 7v. In case of such event EMMC is turned off and all read/write operations are unavailable. After the voltage level is restored all oprations are resumed.
 
 ## Motivation
 
-Implement logic that will allow SDL to resume after battery charge is restored or to start up correctly in the next ingnition cycle if SDL was shut down due to LOW VOLTAGE event. 
+Implement logic that will allow SDL to resume after battery charge is restored or to start up correctly in the next ingnition cycle if SDL was shut down due to LOW VOLTAGE event. Proposed solution will help vehicle to optimize battery charge consumption.
 
 ## Proposed solution
 
-When battery voltage hits below 7v
-Extend enum "ApplicationsCloseReason" with "LOW_VOLTAGE" element. By getting this value, SDL stops any read/write activities:
+When battery voltage hits below 7v SDL will "freeze" all operation untill it will be switched off or resumed. During LOW_VOLTAGE state proposed the following SDL behavior:
+
 - SDL ignores all requests from mobile applications
-- SDL ignores all responses and messages from HMI except OnAwakeSDL or OnExitAllApplications (IGNITION_OFF)
+- SDL ignores all responses and messages from HMI except messages for "WAKE_UP" or "IGNITION_OFF"
 - SDL stops audio/video streaming
 - During LOW_VOLTAGE all transports are unavailable for SDL
-SDL persists resumption related data stored before receiving OnExitAllApplications(LOW_VOLTAGE)
-If SDL receives OnExitAllApplications(LOW_VOLTAGE) during Policy Table Update the update sequence must be stopped. Policy table remains with flag UPDATE_NEEDED
-SDL resumes its regular work after receiving OnAwakeSDL
-It is expected that after 10 seconds voltage level won't be resumed HMI will send OnExitAllApplications (IGNITION_OFF)
+- SDL persists resumption related data stored before receiving LOW_VOLTAGE message
+- After WAKE_UP applications data will be resumed to the state before LOW_VOLTAGE event
+- If SDL receives LOW_VOLTAGE during Policy Table Update the update sequence must be stopped. Policy table remains with flag UPDATE_NEEDED
+- If LOW_VOLTAGE was received at the moment of writing to policies database, SDLand Policies Manager must keep policies database correct and working. After "WAKE_UP" policy database reflects the last know correct state.
+- SDL resumes its regular work after receiving "WAKE_UP"
+- SDL must be able to start up correctly in the next ignition cycle after it was powered off
 
+
+
+Extend enum "ApplicationsCloseReason" with "LOW_VOLTAGE" element. By getting this value, SDL stops any read/write activities:
+It is expected that after 10 seconds voltage level won't be resumed HMI will send OnExitAllApplications (IGNITION_OFF)
 
 ## Potential downsides
 
