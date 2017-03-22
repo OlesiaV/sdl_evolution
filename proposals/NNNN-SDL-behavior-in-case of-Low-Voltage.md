@@ -7,34 +7,25 @@
 
 ## Introduction
 
-A short description of what the feature is. Try to keep it to a single-paragraph "elevator pitch" so the reader understands what problem this proposal is addressing.
+This proposal defines SDL behavior in case of low voltage event.
+Low voltage scenario is triggered when the battery voltage hits below 7v. In case of such event emmc is turned off and all read/write operations are unavailable. After the voltage level is restored all oprations are resumed.
 
 ## Motivation
 
-Describe the problems that this proposal seeks to address. If the problem is that some common pattern is currently hard to express, show how one can currently get a similar effect and describe its drawbacks. If it's completely new functionality that cannot be emulated, motivate why this new functionality would help SDL mobile developers or OEMs provide users with useful functionality.
+Implement logic that will allow SDL to resume after battery charge is restored or to start up correctly in the next ingnition cycle if SDL was shut down due to LOW VOLTAGE event. 
 
 ## Proposed solution
 
 When battery voltage hits below 7v
 Extend enum "ApplicationsCloseReason" with "LOW_VOLTAGE" element. By getting this value, SDL stops any read/write activities:
-- SDL ignores all incoming requests from mobile applications
-- SDL ignores all responses and messages from HMI except OnAwakeSDL
-- SDL discards all notifications and responses received from HMi that needed to be transferred to mobile app
+- SDL ignores all requests from mobile applications
+- SDL ignores all responses and messages from HMI except OnAwakeSDL or OnExitAllApplications (IGNITION_OFF)
 - SDL stops audio/video streaming
 - During LOW_VOLTAGE all transports are unavailable for SDL
 SDL persists resumption related data stored before receiving OnExitAllApplications(LOW_VOLTAGE)
 If SDL receives OnExitAllApplications(LOW_VOLTAGE) during Policy Table Update the update sequence must be stopped. Policy table remains with flag UPDATE_NEEDED
 SDL resumes its regular work after receiving OnAwakeSDL
-
-Use case 1
-SDL receives OnExitAllApplications (LOW_VOLTAGE)
-SDL sets 10 seconds timer 
-SDL ignores all messages from HMI except OnAwakeSDL or OnExitAllApplications(IGNITION_OFF)
-Timer expires and no OnAwakeSDL from HMI
-SDL shuts down
-
-Timer is not expired and HMI sent OnAwakeSDL
-SDL resumes 
+It is expected that after 10 seconds voltage level won't be resumed HMI will send OnExitAllApplications (IGNITION_OFF)
 
 
 ## Potential downsides
