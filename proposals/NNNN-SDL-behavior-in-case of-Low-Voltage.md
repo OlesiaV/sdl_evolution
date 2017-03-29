@@ -1,9 +1,9 @@
-# Feature name
+# SDL behavior in case of LOW_VOLTAGE event
 
 * Proposal: [SDL-NNNN](NNNN-filename.md)
 * Author: [SDL Developer](https://github.com/smartdevicelink)
 * Status: **Awaiting review**
-* Impacted Platforms: [Core / iOS / Android / Web / RPC / Protocol]
+* Impacted Platforms: [Core / Web / RPC / Protocol]
 
 ## Introduction
 
@@ -12,7 +12,7 @@ LOW_VOLTAGE scenario is triggered when the battery voltage hits below 7v. In cas
 
 ## Motivation
 
-Implement logic that will allow SDL to resume after battery charge is restored or to start up correctly in the next ingnition cycle if SDL was shut down due to LOW VOLTAGE event. Proposed solution will help vehicle to optimize battery charge consumption.
+Implement logic that will allow SDL to resume after battery charge is restored or to start up correctly in the next ingnition cycle if SDL was shut down due to LOW VOLTAGE event. 
 
 ## Proposed solution
 
@@ -24,24 +24,52 @@ When battery voltage hits below 7v SDL will "freeze" all operation untill it wil
 - During LOW_VOLTAGE all transports are unavailable for SDL
 - SDL persists resumption related data stored before receiving LOW_VOLTAGE message
 - After WAKE_UP applications data will be resumed to the state before LOW_VOLTAGE event
-- If SDL receives LOW_VOLTAGE during Policy Table Update the update sequence must be stopped. Policy table remains with flag UPDATE_NEEDED
-- If LOW_VOLTAGE was received at the moment of writing to policies database, SDLand Policies Manager must keep policies database correct and working. After "WAKE_UP" policy database reflects the last know correct state.
+- If LOW_VOLTAGE was received at the moment of writing to policies database, SDL and Policies Manager must keep policies database correct and working. After "WAKE_UP" policy database reflects the last known correct state.
+- SDL and PoliciesManager must persist 'consumer data' (resumption-related + local PT) periodically and independently of the external events
 - SDL resumes its regular work after receiving "WAKE_UP"
 - SDL must be able to start up correctly in the next ignition cycle after it was powered off
 
+## Details of implementation
 
+To implement changes in SDL regarding LOW_VOLTAGE event it is proposed to add new element to <"ApplicationsCloseReason"> enum in HMI_API:
 
-Extend enum "ApplicationsCloseReason" with "LOW_VOLTAGE" element. By getting this value, SDL stops any read/write activities:
-It is expected that after 10 seconds voltage level won't be resumed HMI will send OnExitAllApplications (IGNITION_OFF)
+```xml
+<enum name="ApplicationsCloseReason">
+  <description>Describes the reasons for exiting all of applications.</description>
+  <element name="IGNITION_OFF" />
+  <element name="MASTER_RESET" />
+  <element name="FACTORY_DEFAULTS" />
+  <element name="SUSPEND" />
+  <element name="LOW_VOLTAGE" />
+</enum>
+```
+
+On getting "OnExitAllApplications(LOW_VOLTAGE)", SDL must:
+  - stop all read write activities
+  - ignore all RPC from mobile side
+  - ignore all RPCs from HMI side, except "OnAppInterfaceUnregistered(IGNITION_OFF)" or "OnAwakeSDL"
+
+It is expected that in case LOW_VOLTAGE state will be during 10 seconds VMCU shall power off the CCPU and HMI will send "OnAppInterfaceUnregistered(IGNITION_OFF)" to SDL and SDL will finish its work.
+
+SDL must to start up correctly in the next ignition cycle after LOW_VOLTAGE event
+
+When battery voltage recovers, HMI will send "OnAwakeSDL", SDL must resume its regular behavior.
+SDL must resume HMILevel of connected applications according to HMILevel resumption requirements
 
 ## Potential downsides
 
-Describe any potential downsides or known objections to the course of action presented in this proposal, then provide counter-arguments to these objections. You should anticipate possible objections that may come up in review and provide an initial response here. Explain why the positives of the proposal outweigh the downsides, or why the downside under discussion is not a large enough issue to prevent the proposal from being accepted.
+During LOW_VOLTAGE event SDL won't be able to notify or unregister applictions due to unavailable transports. Data that was transferred during LOW_VOLTAGE will be lost sinse SDL won't be able to perform any read/write activities. Applications may unregister during LOW_VOLTAGE state on HeartBeat timeout expiration.
 
 ## Impact on existing code
 
-Describe the impact that this change will have on existing code. Will some SDL integrations stop compiling due to this change? Will applications still compile but produce different behavior than they used to? Is it possible to migrate existing SDL code to use a new feature or API automatically?
+SDL core must be able to support new element in "ApplicationsCloseReason" enum
 
 ## Alternatives considered
 
-Describe alternative approaches to addressing the same problem, and why you chose this approach instead.
+Due to possible delays between HMI and SDL in case of LOW_VOLTAGE event it is proposed to implement json notification of SDL via mqueue:
+
+In case SDL receives "SDL_LOW_VOLTAGE" message via mqueue, SDL must stop any read/write activities 
+SDL continues to listen to mqueue for "WAKE_UP" or "SHUT_DOWN" message via mqueue.
+
+Such solution does not require any changes in HMI_API and will eliminate delays on RPCs handling
+
