@@ -7,7 +7,7 @@
 
 ## Introduction
 
-Creation of requirements repository in GitHub will allow to document SDL requirements with clear scenarios which will improve software development and testing processes.
+Creation of Requirements repository in GitHub will allow to document SDL requirements with clear scenarios which will improve software development and testing processes.
 
 ## Motivation
 
@@ -15,9 +15,9 @@ Currently system requirements are not publicly available and are not represented
 
 ## Proposed solution
 
-Proposed to create Requirements repository which will allow to keep requirements in the form of user stories with detailed feature descriptions, use cases and diagrams.
+Proposed to create Requirements repository which will allow to keep requirements in the form of user stories with detailed feature descriptions, use cases and diagrams. GitHub Requirements repository may improve the collaboration with contributors clarifying system behavior and capabilities.
 
-The requirements will be presented in the form according to template provided below:
+The Requirements will be presented according to template provided below:
 
 >_The Requirement must have the following labels:_
 >
