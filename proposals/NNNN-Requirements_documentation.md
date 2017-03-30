@@ -3,27 +3,29 @@
 * Proposal: [SDL-NNNN](NNNN-filename.md)
 * Author: [Olesia Vasylieva](https://github.com/smartdevicelink)
 * Status: **Awaiting review**
-* Impacted Platforms: [Core / iOS / Android / Web / RPC / Protocol]
+* Impacted Platforms: []
 
 ## Introduction
 
-Creation of requirements repository will allow to document SDL requirements with clear scenarios which will improve software development and testing processes.
+Creation of requirements repository in GitHub will allow to document SDL requirements with clear scenarios which will improve software development and testing processes.
 
 ## Motivation
 
-Currently system requirements are not publicly available and are not represented in the form of user stories which causes difficulties in understanding of feature purposes and proper system behavior.
+Currently system requirements are not publicly available and are not represented in the form of user stories which causes difficulties in understanding of feature purposes and proper system behavior for OEM manufacturers.
 
 ## Proposed solution
 
-Proposed to create Requirements repository which will allow to keep requirements in the form of user stories with detailed feature descriptions and use cases. 
+Proposed to create Requirements repository which will allow to keep requirements in the form of user stories with detailed feature descriptions, use cases and diagrams.
 
 The requirements will be presented in the form according to template provided below:
 
->_The Requirement must be set with the following labels:_
+>_The Requirement must have the following labels:_
 >
 > **Requirement**
 >
->**Priority:** _High, Medium or Low_
+> **Priority:** _High, Medium or Low_
+>
+> ## The name of the feature
 >
 > ## Description
 >
@@ -33,7 +35,7 @@ The requirements will be presented in the form according to template provided be
 >
 > Link to GitHub with detailed document in MD format
 >
-> **Use Case 1:** The name of Use Case
+> **Use Case 1:** Name of the Use Case
 >
 > **Main Flow:**
 >
@@ -57,7 +59,7 @@ The requirements will be presented in the form according to template provided be
 >
 > Alternative flow for one of the steps above + expected SDL behavior in this flow
 >
-> Describes alternative flow to Main flow described above.
+> _Describes alternative flow to Main flow described above._
 >
 > **Alternative flow 2**
 >
@@ -72,17 +74,17 @@ The requirements will be presented in the form according to template provided be
 > **Proposal:** GitHub issue Number + summary
 >
 > **Parent requirement:** Link to parent requirement issue + summary **OR empty**
-
-
+>
+> **Related Technical Tasks**
 
 ## Potential downsides
 
-Describe any potential downsides or known objections to the course of action presented in this proposal, then provide counter-arguments to these objections. You should anticipate possible objections that may come up in review and provide an initial response here. Explain why the positives of the proposal outweigh the downsides, or why the downside under discussion is not a large enough issue to prevent the proposal from being accepted.
+N/A
 
 ## Impact on existing code
 
-Describe the impact that this change will have on existing code. Will some SDL integrations stop compiling due to this change? Will applications still compile but produce different behavior than they used to? Is it possible to migrate existing SDL code to use a new feature or API automatically?
+N/A
 
 ## Alternatives considered
 
-Describe alternative approaches to addressing the same problem, and why you chose this approach instead.
+N/A
