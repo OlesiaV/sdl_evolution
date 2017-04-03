@@ -11,23 +11,39 @@ Creation of Requirements repository in GitHub (sdl_requirements) will allow to d
 
 ## Motivation
 
-Currently system requirements are not publicly accessible and are not represented in the form of user stories which causes difficulties in understanding of feature purposes and proper system behavior for OEM manufacturers.
+Currently system requirements are not publicly accessible and are not represented in the form of user stories which causes difficulties in understanding of feature purposes and proper system behavior for OEM manufacturers and mobile applications developers.
 
 ## Proposed solution
 
 Proposed to create Requirements repository (sdl_requirements) which will allow to keep requirements in the form of user stories with detailed feature descriptions, use cases and diagrams. GitHub Requirements repository will improve the collaboration with contributors clarifying system behavior and capabilities. 
 
-Clear feature representation gives more options for mobile developers and can become a helpful tool for integration preparations on OEM platform.
-
-Implementing requirements management may also reduce complexity in integration maintenance
+Clear feature representation gives more options for mobile applications developers and can become a helpful tool for integration preparations on OEM platforms.
 
 **Creation of Requirements repository will allow to minimize or eliminate the following difficulties:**
 
 - A lot of requests on Slack regarding SDL feature description since currently the list of SDL features is not clear for community
 - Placement of existing SDL requirements is not freely available
 - Inaccessibility of requiremetns makes feature review and defects analysis complex
+- Complexity of integration maintenance
 
-The Requirements will be presented according to template provided below:
+Requirements repository also requires defined requirements management process which includes:
+
+- documenting of new requirements
+- updating existing requirements based on changes proposed through Evolution process
+- tracing requirements lifecycle from proposal to every change made to the requirement
+- prevent duplicates or contradictions in requirements
+
+Next picture shows relations between different arifacts in OpenSDL.
+
+
+_Need to enter picture here_
+
+
+
+Requirements form basis of acceptance criteria for future contribution. Such issues are high level description of expected outcome.
+The template of requirement _here must be the link to the file with requirement template_
+
+
 
 >_The Requirement must have the following labels:_
 >
@@ -43,7 +59,7 @@ The Requirements will be presented according to template provided below:
 >
 > ## Detailed description
 >
-> Link to GitHub with detailed document in MD format
+> Link to GitHub with detailed document in MD format:
 >
 > **Use Case 1:** Name of the Use Case
 >
@@ -84,8 +100,7 @@ The Requirements will be presented according to template provided below:
 > **Proposal:** GitHub issue Number + summary
 >
 > **Parent requirement:** Link to parent requirement issue + summary **OR empty**
->
-> **Related Technical Tasks**
+
 
 ## Potential downsides
 
