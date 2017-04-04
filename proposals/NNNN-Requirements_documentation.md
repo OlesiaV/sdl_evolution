@@ -19,6 +19,8 @@ Proposed to create Requirements repository (sdl_requirements) which will allow t
 
 Clear feature representation gives more options for mobile applications developers and can become a helpful tool for integration preparations on OEM platforms.
 
+There are [sdl_hmi_integration_guidelines](https://github.com/smartdevicelink/sdl_hmi_integration_guidelines) and [sdl_core_guides](https://github.com/smartdevicelink/sdl_core_guides) in free access for community but none of these documents provide clarifications on SDL system behavior and do not give full description of available features.
+
 **Creation of Requirements repository will allow to minimize or eliminate the following difficulties:**
 
 - A lot of requests on Slack regarding SDL feature description since currently the list of SDL features is not clear for community
@@ -26,89 +28,38 @@ Clear feature representation gives more options for mobile applications develope
 - Inaccessibility of requiremetns makes feature review and defects analysis complex
 - Complexity of integration maintenance
 
-Requirements repository also requires defined requirements management process which includes:
+Requirements repository also requires defined Requirements management process which includes but not limitted to:
 
 - documenting of new requirements
 - updating existing requirements based on changes proposed through Evolution process
 - tracing requirements lifecycle from proposal to every change made to the requirement
 - prevent duplicates or contradictions in requirements
 
-Next picture shows relations between different arifacts in OpenSDL.
+SDL Development Lifecycle includes creation and usage of a list of artifacts that are located in different repositories. In the confines of SDL Development Lifecycle generic artifacts are:
 
+- Requirement
+- Tasks
+- Defetcs
 
-_Need to enter picture here_
+Next picture shows relations between different arifacts in SDL.
 
+![tasks_relations](https://github.com/OlesiaV/sdl_evolution/blob/requirements-documentation-proposal/proposals/assets/sdl_requirements_repository/tasks_relations.png)<br>
 
+Requirements form basis of acceptance criteria for future contribution. Such issues are high level description of expected outcome. Proposed to create the requirements according to [requirement_template](https://github.com/OlesiaV/sdl_evolution/blob/requirements-documentation-proposal/proposals/assets/sdl_requirements_repository/requirement_template.md). 
 
-Requirements form basis of acceptance criteria for future contribution. Such issues are high level description of expected outcome.
-The template of requirement _here must be the link to the file with requirement template_
+The Requirement will be linked to the document with all detailed technical information, Use Cases and Diagrams which can be revised in case of any changes, see the template to [detailed_info](https://github.com/OlesiaV/sdl_evolution/blob/requirements-documentation-proposal/proposals/assets/sdl_requirements_repository/detailed_info.md).
 
+Technical Task contains information describing changes to Requirements , proposed to be created according to the [technical_task_template](https://github.com/OlesiaV/sdl_evolution/blob/requirements-documentation-proposal/proposals/assets/sdl_requirements_repository/technical_task_template.md).
 
-
->_The Requirement must have the following labels:_
->
-> **Requirement**
->
-> **Priority:** _High, Medium or Low_
->
-> ## The name of the feature
->
-> ## Description
->
-> User story or the high-level idea of described feature
->
-> ## Detailed description
->
-> Link to GitHub with detailed document in MD format:
->
-> **Use Case 1:** Name of the Use Case
->
-> **Main Flow:**
->
-> _Pre-conditions:_
->
-> Text of related pre-condition
->
-> Note: there could be more than one pre-condition
->
-> _Steps:_
->
-> Description of steps for user OR sequence
->
-> Note: there could be more than one Step
->
-> _Expected:_
->
-> Description of expected SDL behavior after Steps above
->
-> **Alternative flow 1**
->
-> Alternative flow for one of the steps above + expected SDL behavior in this flow
->
-> _Describes alternative flow to Main flow described above._
->
-> **Alternative flow 2**
->
-> Step N.N. Alternative flow for one of the steps above + expected SDL behavior in this flow
->
-> ## Related Diagrams
->
-> Diagrams (for example activity diagram) describing this feature must be attached
->
-> ## Links
->
-> **Proposal:** GitHub issue Number + summary
->
-> **Parent requirement:** Link to parent requirement issue + summary **OR empty**
 
 
 ## Potential downsides
 
-Additional efforts in Requirements management which includes tracking of any changes and updates
+Additional efforts in Requirements management which includes tracking of any changes and updates on GitHub.
 
 ## Impact on existing code
 
-Proposed process has no impact on existing code but it evolves requirements management process
+Proposed process has no impact on existing code but it evolves Requirements management process.
 
 ## Alternatives considered
 
