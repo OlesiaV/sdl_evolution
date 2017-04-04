@@ -15,7 +15,7 @@ Currently system requirements are not publicly accessible and are not represente
 
 ## Proposed solution
 
-Proposed to create Requirements repository (sdl_requirements) which will allow to keep requirements in the form of user stories with detailed feature descriptions, use cases and diagrams. GitHub Requirements repository will improve the collaboration with contributors clarifying system behavior and capabilities. 
+Proposed to create Requirements repository (sdl_requirements) that will allow keeping requirements in the form of user stories with detailed feature descriptions, use cases and diagrams. GitHub Requirements repository will improve the collaboration with contributors clarifying system behavior and capabilities. 
 
 Clear feature representation gives more options for mobile applications developers and can become a helpful tool for integration preparations on OEM platforms.
 
@@ -25,10 +25,10 @@ There are [sdl_hmi_integration_guidelines](https://github.com/smartdevicelink/sd
 
 - A lot of requests on Slack regarding SDL feature description since currently the list of SDL features is not clear for community
 - Placement of existing SDL requirements is not freely available
-- Inaccessibility of requiremetns makes feature review and defects analysis complex
+- Inaccessibility of requirements makes feature review and defects analysis complex
 - Complexity of integration maintenance
 
-Requirements repository also requires defined Requirements management process which includes but not limitted to:
+Requirements repository also requires defined Requirements management process which includes but not limited to:
 
 - documenting of new requirements
 - updating existing requirements based on changes proposed through Evolution process
@@ -37,11 +37,11 @@ Requirements repository also requires defined Requirements management process wh
 
 SDL Development Lifecycle includes creation and usage of a list of artifacts that are located in different repositories. In the confines of SDL Development Lifecycle generic artifacts are:
 
-- Requirement
-- Tasks
-- Defetcs
+- Requirements
+- Technical Tasks
+- Defects
 
-Next picture shows relations between different arifacts in SDL.
+Next picture shows relations between different artifacts in SDL.
 
 ![tasks_relations](https://github.com/OlesiaV/sdl_evolution/blob/requirements-documentation-proposal/proposals/assets/sdl_requirements_repository/tasks_relations.png)<br>
 
@@ -51,11 +51,9 @@ The Requirement will be linked to the document with all detailed technical infor
 
 Technical Task contains information describing changes to Requirements , proposed to be created according to the [technical_task_template](https://github.com/OlesiaV/sdl_evolution/blob/requirements-documentation-proposal/proposals/assets/sdl_requirements_repository/technical_task_template.md).
 
-
-
 ## Potential downsides
 
-Additional efforts in Requirements management which includes tracking of any changes and updates on GitHub.
+Additional efforts in Requirements management that includes tracking of any changes, creation and updates of related to Requirements artifacts on GitHub.
 
 ## Impact on existing code
 
